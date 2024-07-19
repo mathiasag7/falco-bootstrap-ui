@@ -36,6 +36,12 @@ path = "falco_ui/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
+  "django-cotton",
+  "django-tailwind-cli",
+  "django-template-partials",
+  "django-watchfiles",
+  "django-browser-reload",
+  "heroicons[django]",
   "coverage[toml]>=6.5",
   "pytest",
 ]

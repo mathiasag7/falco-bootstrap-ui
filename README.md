@@ -1,14 +1,19 @@
-# falco_ui
+# falco-ui
 
 [![PyPI - Version](https://img.shields.io/pypi/v/falco-ui.svg)](https://pypi.org/project/falco-ui)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/falco-ui.svg)](https://pypi.org/project/falco-ui)
 
 -----
 
+> [!IMPORTANT]
+> This package currently contains minimal features and is a work-in-progress
+
+
 **Table of Contents**
 
-- [Installation](#installation)
-- [License](#license)
+- [falco-ui](#falco-ui)
+  - [Installation](#installation)
+  - [License](#license)
 
 ## Installation
 

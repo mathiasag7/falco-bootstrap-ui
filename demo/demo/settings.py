@@ -41,9 +41,15 @@ INSTALLED_APPS = [
     "falco_ui",
     "falco_ui.favicons",
     "falco_ui.forms",
+    "django_cotton",
+    "django_tailwind_cli",
+    "django_watchfiles",
+    "django_browser_reload",
+    "heroicons",
 ]
 
 MIDDLEWARE = [
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -55,17 +61,35 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "demo.urls"
 
+DEFAULT_LOADERS = [
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
+]
+CACHED_LOADERS = [("django.template.loaders.cached.Loader", DEFAULT_LOADERS)]
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True,
+        "DIRS": [BASE_DIR / "templates"],
+        # "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+            ],
+            "loaders": [
+                
+                    "django_cotton.cotton_loader.Loader",
+                     ("template_partials.loader.Loader",
+                    DEFAULT_LOADERS if DEBUG else CACHED_LOADERS,)
+                
+            ],
+            "builtins": [
+                "django_cotton.templatetags.cotton",
+                "template_partials.templatetags.partials",
+                "heroicons.templatetags.heroicons",
             ],
         },
     },
@@ -121,8 +145,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [BASE_DIR / "assets"]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-

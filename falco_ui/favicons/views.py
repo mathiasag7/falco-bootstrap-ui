@@ -1,10 +1,8 @@
 from pathlib import Path
 
-from django.contrib.staticfiles import finders
-from django.http import FileResponse
-from django.http import HttpResponse
-from django.http import HttpRequest
 from django.conf import settings
+from django.contrib.staticfiles import finders
+from django.http import FileResponse, HttpRequest, HttpResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
 
