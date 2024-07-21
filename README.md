@@ -35,6 +35,7 @@ pip install falco-ui
 ## Components
 
 - [ ] Accordion
+- [ ] Accordion group
 - [ ] Alert
 - [ ] Badge
 - [ ] Breadcrumb
@@ -55,9 +56,11 @@ pip install falco-ui
 - [ ] Popovers ???
 - [ ] Progress
 - [ ] Scrollspy
+- [ ] Stepper
 - [ ] Search bar (select2 like)
 - [ ] Spinners
 - [ ] Toasts
+- [ ] Dark mode switcher
 - [ ] Tooltips ????
 
 

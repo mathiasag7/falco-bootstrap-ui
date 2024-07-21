@@ -7,5 +7,8 @@ _default:
 @fmt:
     hatch fmt --formatter
 
+@dj *ARGS:
+    cd demo && hatch run python manage.py {{ ARGS }}
+
 @run-demo:
     cd demo && hatch run python manage.py tailwind runserver

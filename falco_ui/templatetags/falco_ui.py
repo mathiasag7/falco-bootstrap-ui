@@ -16,3 +16,30 @@ def falco_ui_script(
         alpinejs,
         static("falco-ui/main.js"),
     )
+
+
+try:
+    from heroicons.templatetags.heroicons import (
+        heroicon_outline,
+        heroicon_mini,
+        heroicon_micro,
+        heroicon_solid,
+    )
+except ImportError:
+    pass
+else:
+
+    @register.simple_tag
+    def heroicon_wrapper(style: str, attrs: str | None = None):
+        style_tag_map: dict[str, callable] = {
+            "outline": heroicon_outline,
+            "solid": heroicon_solid,
+            "mini": heroicon_mini,
+            "micro": heroicon_micro,
+        }
+        if attrs is None:
+            attrs = {}
+        else:
+            attrs = dict([attr.split("=") for attr in attrs.split()])
+            attrs = {k: v.strip('"') for k, v in attrs.items()}
+        return style_tag_map[style](**attrs)
