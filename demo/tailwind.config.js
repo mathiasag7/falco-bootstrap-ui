@@ -1,10 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./templates/**/*.html", "**/templates/**/*.html", "../falco_ui/templates/**/*.html"],
+  darkMode: 'class', // required for theme-toggleto work
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          light: colors.blue,
+          dark: colors.yellow
+        },
+        secondary: colors.slate,
+      },
+    },
   },
   plugins: [
     require("@tailwindcss/typography"),

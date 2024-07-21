@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_watchfiles",
     "django_browser_reload",
     "heroicons",
+    "template_partials.apps.SimpleAppConfig",
 ]
 
 MIDDLEWARE = [

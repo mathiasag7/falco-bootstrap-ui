@@ -3,36 +3,64 @@
 {% load falco_ui %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c-slot="http://www.w3.org/1999/xlink">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="htmx-config" content='{"globalViewTransitions": "true"}' />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta charset="UTF-8"/>
+    <meta name="htmx-config" content='{"globalViewTransitions": "true"}'/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
     <script src="https://unpkg.com/htmx.org@2.0.1"></script>
     <title>Falco UI Demo</title>
     {% tailwind_css %}
     {% falco_ui_script %}
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+
+
+        // Whenever the user explicitly chooses light mode
+
+
+        // Whenever the user explicitly chooses dark mode
+        localStorage.theme = 'dark'
+
+        // Whenever the user explicitly chooses to respect the OS preference
+        localStorage.removeItem('theme')
+    </script>
 </head>
 
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <header class="bg-gray-800 text-white p-4">
-        <div class="container mx-auto">
-            <h1 class="text-2xl font-bold">Falco UI Demo</h1>
-        </div>
-    </header>
-    <main class="container mx-auto py-5">
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-gray-100 dark:bg-gray-900">
+<header class="bg-gray-800 text-white p-4">
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-bold">Falco UI Demo</h1>
+        <c-theme-toggle></c-theme-toggle>
+    </div>
+</header>
+<main class="container mx-auto py-5">
+    <c-accordion title="An accordion with from the html details tag" open>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda consectetur, culpa, cum delectus
+        dolore
+        dolorem doloribus enim facere labore, neque non officia pariatur quas quia? A ducimus esse voluptas!
+    </c-accordion>
 
-        <c-button>A button</c-button>
-        
-        <c-tabs>
-            <c-tab name="Tab 1">Tab 1 content</c-tab>
-            <c-tab name="Tab 2">Tab 2 content</c-tab>
-            <c-tab name="Tab 3">Tab 3 content</c-tab>
-        </c-tabs>
-    </main>
+    <c-accordion>
+        <c-slot name="title"><h2 class="font-bold">An accordion using a slot for the title</h2></c-slot>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda consectetur, culpa, cum delectus
+        dolore
+        dolorem doloribus enim facere labore, neque non officia pariatur quas quia? A ducimus esse voluptas!
+    </c-accordion>
+
+    <c-accordion title="An accordion with an icon">
+        <c-slot name="icon">
+            <c-heroicon.outline name="academic-cap"></c-heroicon.outline>
+        </c-slot>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda consectetur, culpa, cum delectus
+        dolore
+        dolorem doloribus enim facere labore, neque non officia pariatur quas quia? A ducimus esse voluptas!
+    </c-accordion>
+    <hr class="my-5 font-bold">
+</main>
 </body>
 
 </html>
