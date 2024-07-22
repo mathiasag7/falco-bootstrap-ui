@@ -1,6 +1,6 @@
 {% load static %}
 {% load tailwind_cli %}
-{% load falco_ui %}
+
 
 <!DOCTYPE html>
 <html lang="en" xmlns:c-slot="http://www.w3.org/1999/xlink">
@@ -11,22 +11,16 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://unpkg.com/htmx.org@2.0.1"></script>
     <title>Falco UI Demo</title>
     {% tailwind_css %}
-    {% falco_ui_script %}
     <script>
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-
-
-        // Whenever the user explicitly chooses light mode
-
-
-        // Whenever the user explicitly chooses dark mode
-        localStorage.theme = 'dark'
-
-        // Whenever the user explicitly chooses to respect the OS preference
-        localStorage.removeItem('theme')
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     </script>
 </head>
 
