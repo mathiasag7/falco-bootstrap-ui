@@ -1,3 +1,4 @@
+import django
 from pathlib import Path
 
 from django.conf import settings
@@ -6,12 +7,20 @@ from django.http import FileResponse, HttpRequest, HttpResponse
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
 
+if django.VERSION[:2] >= (5, 1):
+    from django.contrib.auth.decorators import login_not_required
+else:
+
+    def login_not_required(view_func):
+        return view_func
+
+
 ONE_DAY = 60 * 60 * 24
-max_age = getattr(settings, "FUI_FAVICON_MAX_AGE", ONE_DAY)
 
 
 @require_GET
-@cache_control(max_age=max_age, immutable=True, public=True)
+@cache_control(max_age=0 if settings.DEBUG else ONE_DAY, immutable=True, public=True)
+@login_not_required
 def favicon(request: HttpRequest) -> HttpResponse | FileResponse:
     name = request.path.lstrip("/")
     if path := finders.find(name):
